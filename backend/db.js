@@ -83,7 +83,7 @@ const exists = fs.existsSync(dbPath);
 if (!exists) {
   // If the database file does not exist, create the table and preseed data
   createTable();
-  preseedData();
+  //preseedData();
 } else {
   // If the database file already exists, do nothing (data will persist)
   console.log("Database file already exists. Data will persist.");
