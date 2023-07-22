@@ -1,5 +1,13 @@
-const sqlite3 = require("sqlite3").verbose();
-const path = require("path");
+import sqlite3 from "sqlite3";
+import { fileURLToPath } from "url";
+import path from "path";
+import fs from "fs"
+
+//const sqlite3 = require("sqlite3").verbose();
+//const path = require("path");
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const dbPath = path.join(__dirname, "my-database.db");
 const db = new sqlite3.Database(dbPath);
@@ -77,7 +85,6 @@ function preseedData() {
   }
 
 // Check if the database file exists
-const fs = require("fs");
 const exists = fs.existsSync(dbPath);
 
 if (!exists) {
@@ -89,4 +96,6 @@ if (!exists) {
   console.log("Database file already exists. Data will persist.");
 }
 
-module.exports = db;
+//module.exports = db;
+
+export {db}

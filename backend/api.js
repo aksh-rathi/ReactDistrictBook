@@ -1,6 +1,10 @@
-const express = require("express");
-const cors = require("cors");
-const db = require("./db");
+import express from "express";
+import cors from "cors";
+import {db} from "./db.js"
+
+// const express = require("express");
+// const cors = require("cors");
+// const db = require("./db");
 
 const app = express();
 
