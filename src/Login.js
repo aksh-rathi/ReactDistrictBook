@@ -1,29 +1,12 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import './Login.css'; // Create a CSS file for styling
-
-// const Login = () => {
-//     return (
-//       <div className="login-container">
-//         <h1>Login</h1>
-//         <form className="login-form">
-//           <input type="text" placeholder="Username" />
-//           <input type="password" placeholder="Password" />
-//           <button type="submit">Login</button>
-//         </form>
-//         <p className="register-link">
-//           Don't have an account? <Link to="/register">Register</Link>
-//         </p>
-//       </div>
-//     );
-//   };
-
-// export default Login;
 import React, { useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const Login = ({onLogin}) => {
+
+  const userEmail = process.env.REACT_APP_USER_EMAIL;
+  const userPassword = process.env.REACT_APP_USER_PASSWORD;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -48,35 +31,15 @@ const Login = ({onLogin}) => {
   };
 
   const handleLoginSubmit = (e) => {
-    e.preventDefault();
-
-    // // Perform API call for login credential validation
-    // // Replace with your actual API endpoint and logic
-    // if (email && password) {
-    //   // API call to validate login credentials
-    //   // Example using fetch API
-    //   fetch('https://example.com/login', {
-    //     method: 'POST',
-    //     body: JSON.stringify({ email, password }),
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   })
-    //     .then((response) => {
-    //       if (response.ok) {
-    //         // Login successful, perform desired action (e.g., redirect)
-    //         console.log('Login successful');
-    //       } else {
-    //         // Login failed, handle error accordingly
-    //         console.log('Login failed');
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       // Handle error from API call
-    //       console.log('Error:', error);
-    //     });
-    // }
-    navigate('/mainview');
+    if (email === userEmail && password === userPassword) {
+      // Set the isLoggedIn variable in localStorage to indicate successful login
+      localStorage.setItem("isLoggedIn", "true");
+      navigate("/mainview");
+    } else {
+      // Handle invalid login credentials (optional)
+      // For example, display an error message or show a toast notification
+      alert("Invalid login credentials");
+    }
   };
 
   return (

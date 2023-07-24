@@ -4,13 +4,16 @@ import "../MainView.css";
 import { ChildTable } from "./ChildTable";
 import { Modal } from "../Modal";
 import { useParams } from "react-router-dom";
+import {HeaderView} from "../common/Header"
 
 var apiUrl = process.env.REACT_APP_API_URL;
 function ChildView() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
   const { id } = useParams();
   const [modalOpen, setModalOpen] = useState(false);
   const [rows, setRows] = useState([]);
   const [rowToEdit, setRowToEdit] = useState(null);
+  const [familyHead, setFamilyHead] = useState(null);
 
   // Fetch data from the API when the component mounts
   useEffect(() => {
@@ -21,7 +24,11 @@ function ChildView() {
         }
         return response.json();
       })
-      .then((data) => setRows(data))
+      .then((data) => {
+        setRows(data);
+        let fHead = data.find(r=>r.id==id)
+        setFamilyHead((fHead?fHead:null))
+      })
       .catch((error) => console.error("Error fetching data:", error.message));
   }, []);
   
@@ -114,10 +121,18 @@ function ChildView() {
 
   return (
     <div className="App">
+      <HeaderView title={`${familyHead?familyHead.name:""} Family's Information`} />
       <ChildTable rows={rows} deleteRow={handleDeleteRow} editRow={handleEditRow} />
-      <button onClick={() => setModalOpen(true)} className="btn">
+      {isLoggedIn ? (
+        <button onClick={() => setModalOpen(true)} className="btn">
+          Add
+        </button>
+      ) : (
+        <p></p>
+      )}
+      {/* <button onClick={() => setModalOpen(true)} className="btn">
         Add
-      </button>
+      </button> */}
       {modalOpen && (
         <Modal
           closeModal={() => {

@@ -4,6 +4,7 @@ import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import "./ChildTable.css";
 
 export const ChildTable = ({ rows, deleteRow, editRow }) => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
   return (
     <div className="table-wrapper">
       <table className="table">
@@ -16,7 +17,7 @@ export const ChildTable = ({ rows, deleteRow, editRow }) => {
             <th>District</th>
             <th className="expand">DOB</th>
             <th>Status</th>
-            <th>Actions</th>
+            {isLoggedIn ?(<th>Actions</th>):(<th/>)}
           </tr>
         </thead>
         <tbody>
@@ -42,7 +43,8 @@ export const ChildTable = ({ rows, deleteRow, editRow }) => {
                   </span>
                 </td>
                 <td className="fit">
-                  <span className="actions">
+                {isLoggedIn ? (
+                    <span className="actions">
                     <BsFillTrashFill
                       className="delete-btn"
                       onClick={() => deleteRow(idx)}
@@ -52,6 +54,9 @@ export const ChildTable = ({ rows, deleteRow, editRow }) => {
                       onClick={() => editRow(idx)}
                     />
                   </span>
+                  ) : (
+                    <p></p>
+                  )}
                 </td>
               </tr>
             );

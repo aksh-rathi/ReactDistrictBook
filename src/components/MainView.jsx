@@ -3,8 +3,11 @@ import { useState,useEffect } from "react";
 import "./MainView.css";
 import { Table } from "./Table";
 import { Modal } from "./Modal";
+import {HeaderView} from "./common/Header"
+
 var apiUrl = process.env.REACT_APP_API_URL;
 function MainView() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
   const [modalOpen, setModalOpen] = useState(false);
   const [rows, setRows] = useState([]);
   const [rowToEdit, setRowToEdit] = useState(null);
@@ -122,10 +125,18 @@ function MainView() {
 
   return (
     <div className="App">
+      <HeaderView title={"Family Heads Information"} />
       <Table rows={rows} deleteRow={handleDeleteRow} editRow={handleEditRow} />
-      <button onClick={() => setModalOpen(true)} className="btn">
+      {isLoggedIn ? (
+        <button onClick={() => setModalOpen(true)} className="btn">
+          Add
+        </button>
+      ) : (
+        <p></p>
+      )}
+      {/* <button onClick={() => setModalOpen(true)} className="btn">
         Add
-      </button>
+      </button> */}
       {modalOpen && (
         <Modal
           closeModal={() => {

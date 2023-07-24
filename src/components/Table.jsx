@@ -10,6 +10,7 @@ const initialSortConfig = {
 var itemsPerPage = 5
 
 export const Table = ({ rows, deleteRow, editRow }) => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState(initialSortConfig);
   const [searchTerm, setSearchTerm] = useState("");
@@ -93,7 +94,7 @@ export const Table = ({ rows, deleteRow, editRow }) => {
             <th onClick={() => handleSort("district")}>District</th>
             <th onClick={() => handleSort("dob")}>DOB</th>
             <th onClick={() => handleSort("status")}>Status</th>
-            <th>Actions</th>
+            {isLoggedIn ?(<th>Actions</th>):(<th/>)}
           </tr>
         </thead>
         <tbody>
@@ -117,7 +118,8 @@ export const Table = ({ rows, deleteRow, editRow }) => {
                   </span>
                 </td>
                 <td className="fit">
-                  <span className="actions">
+                {isLoggedIn ? (
+                    <span className="actions">
                     <BsFillTrashFill
                       className="delete-btn"
                       onClick={() => deleteRow(idx)}
@@ -127,6 +129,9 @@ export const Table = ({ rows, deleteRow, editRow }) => {
                       onClick={() => editRow(idx)}
                     />
                   </span>
+                  ) : (
+                    <p></p>
+                  )}
                 </td>
               </tr>
             );
