@@ -3,12 +3,8 @@ import { useState,useEffect } from "react";
 import "./MainView.css";
 import { Table } from "./Table";
 import { Modal } from "./Modal";
-var apiUrl = process.env.API_URL;
+var apiUrl = process.env.REACT_APP_API_URL;
 function MainView() {
-  if (apiUrl == undefined){
-    console.log("empty env")
-    apiUrl="http://localhost:3009/api"
-  }
   const [modalOpen, setModalOpen] = useState(false);
   const [rows, setRows] = useState([]);
   const [rowToEdit, setRowToEdit] = useState(null);
