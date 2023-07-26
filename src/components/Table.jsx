@@ -89,11 +89,14 @@ export const Table = ({ rows, deleteRow, editRow }) => {
           <tr>
             <th onClick={() => handleSort("name")}>Name</th>
             <th onClick={() => handleSort("fatherName")}>Father Name</th>
-            <th onClick={() => handleSort("motherName")}>Mother Name</th>
-            <th onClick={() => handleSort("tehsil")}>Tehsil</th>
+            <th onClick={() => handleSort("profession")}>Profession</th>
+            <th onClick={() => handleSort("gotra")}>Gotra</th>
+            <th onClick={() => handleSort("village")}>Village</th>
             <th onClick={() => handleSort("district")}>District</th>
-            <th onClick={() => handleSort("dob")}>DOB</th>
-            <th onClick={() => handleSort("status")}>Status</th>
+            <th onClick={() => handleSort("raddress")}>Address</th>
+            <th onClick={() => handleSort("dob")}>Age</th>
+            <th>Mobile</th>
+            {/* <th onClick={() => handleSort("status")}>Status</th> */}
             {isLoggedIn ?(<th>Actions</th>):(<th/>)}
           </tr>
         </thead>
@@ -106,17 +109,15 @@ export const Table = ({ rows, deleteRow, editRow }) => {
             const age = DOB ? currentYear - DOB.getFullYear() : 'N/A';
             return (
               <tr key={idx}>
-                <td><Link to={`/dataTable/${row.id}`}>{row.name}</Link></td>
+                <td ><Link to={`/dataTable/${row.id}`}>{row.name}</Link></td>
                 <td>{row.fatherName}</td>
-                <td>{row.motherName}</td>
-                <td>{row.tehsil}</td>
-                <td>{row.district}</td>
-                <td className="expand" align="center">{age}</td>
-                <td>
-                  <span className={`label label-${row.status}`}>
-                    {statusText}
-                  </span>
-                </td>
+                <td>{row.profession}</td>
+                <td>{row.gotra}</td>
+                <td >{row.village}</td>
+                <td >{row.district}</td>
+                <td >{row.raddress}</td>
+                <td>{age}</td>
+                <td>{row.mobilenumber}</td>
                 <td className="fit">
                 {isLoggedIn ? (
                     <span className="actions">

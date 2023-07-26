@@ -1,5 +1,4 @@
 import { useState,useEffect } from "react";
-
 import "./MainView.css";
 import { Table } from "./Table";
 import { Modal } from "./Modal";
@@ -21,7 +20,9 @@ function MainView() {
         }
         return response.json();
       })
-      .then((data) => setRows(data))
+      .then((data) => {
+        setRows(data)
+      })
       .catch((error) => console.error("Error fetching data:", error.message));
   }, []);
   
@@ -52,21 +53,12 @@ function MainView() {
     setModalOpen(true);
   };
 
-  // const handleSubmit = (newRow) => {
-  //   rowToEdit === null
-  //     ? setRows([...rows, newRow])
-  //     : setRows(
-  //         rows.map((currRow, idx) => {
-  //           if (idx !== rowToEdit) return currRow;
-
-  //           return newRow;
-  //         })
-  //       );
-  // };
   const handleSubmit = (newRow) => {
     
     if (rowToEdit === null) {
       newRow.isHead=1;
+      newRow.relation="own";
+      console.log(newRow.dob);
       // Create a new record
       fetch(`${apiUrl}/records`, {
         method: "POST",

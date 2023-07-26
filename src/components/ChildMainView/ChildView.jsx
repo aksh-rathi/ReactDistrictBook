@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import "../MainView.css";
 
 import { ChildTable } from "./ChildTable";
-import { Modal } from "../Modal";
+import { ChildModal } from "./ChildModel";
 import { useParams } from "react-router-dom";
 import {HeaderView} from "../common/Header"
+import {Card} from "../common/Card"
 
 var apiUrl = process.env.REACT_APP_API_URL;
 function ChildView() {
@@ -27,6 +28,7 @@ function ChildView() {
       .then((data) => {
         setRows(data);
         let fHead = data.find(r=>r.id==id)
+        console.log(fHead)
         setFamilyHead((fHead?fHead:null))
       })
       .catch((error) => console.error("Error fetching data:", error.message));
@@ -122,6 +124,7 @@ function ChildView() {
   return (
     <div className="App">
       <HeaderView title={`${familyHead?familyHead.name:""} Family's Information`} />
+      {familyHead?<Card data={familyHead}/>:""}
       <ChildTable rows={rows} deleteRow={handleDeleteRow} editRow={handleEditRow} />
       {isLoggedIn ? (
         <button onClick={() => setModalOpen(true)} className="btn">
@@ -134,7 +137,7 @@ function ChildView() {
         Add
       </button> */}
       {modalOpen && (
-        <Modal
+        <ChildModal
           closeModal={() => {
             setModalOpen(false);
             setRowToEdit(null);

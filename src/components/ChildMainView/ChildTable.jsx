@@ -13,9 +13,10 @@ export const ChildTable = ({ rows, deleteRow, editRow }) => {
             <th>Name</th>
             <th>FatherName</th>
             <th>MotherName</th>
-            <th>Tehsil</th>
-            <th>District</th>
-            <th className="expand">DOB</th>
+            <th>Age</th>
+            <th>Relation</th>
+            <th>Education</th>
+            <th>Profession</th>
             <th>Status</th>
             {isLoggedIn ?(<th>Actions</th>):(<th/>)}
           </tr>
@@ -34,9 +35,10 @@ export const ChildTable = ({ rows, deleteRow, editRow }) => {
                 <td>{row.name}</td>
                 <td>{row.fatherName}</td>
                 <td>{row.motherName}</td>
-                <td>{row.tehsil}</td>
-                <td>{row.district}</td>
-                <td className="expand" align="center">{age}</td>
+                <td>{age}</td>
+                <td>{row.relation}</td>
+                <td>{row.education}</td>
+                <td>{row.profession}</td>
                 <td>
                   <span className={`label label-${row.status}`}>
                     {statusText}

@@ -1,0 +1,22 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .card table {
+    width: 100%;
+  }
+  
+  .card td {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .card td:last-child {
+    border-bottom: none;
+  }
+  

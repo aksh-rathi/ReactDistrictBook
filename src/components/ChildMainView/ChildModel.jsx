@@ -1,30 +1,23 @@
 import React, { useState } from "react";
 
-import "./Modal.css";
+import "../Modal.css";
 
-export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
+export const ChildModal = ({ closeModal, onSubmit, defaultValue }) => {
   const [formState, setFormState] = useState(
     defaultValue || {
       name: "",
       fatherName:"",
       motherName:"",
-      tehsil: "",
-      district: "",
-      gotra: "",
-      village: "",
-      mvillage: "",
-      mobilenumber: "",
-      paddress: "",
-      raddress: "",
       education: "",
       profession: "",
+      relation:"",
       dob: new Date("1990-01-01").toISOString().split('T')[0],
       status: "married",
     }
   );
   const [errors, setErrors] = useState("");
   const validateForm = () => {
-    if (formState.name && formState.fatherName && formState.motherName && formState.district && formState.dob && formState.status) {
+    if (formState.name && formState.fatherName && formState.motherName && formState.relation && formState.dob && formState.status) {
       setErrors("");
       return true;
     } else {
@@ -60,10 +53,8 @@ export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
       onClick={(e) => {
         if (e.target.className === "modal-container") closeModal();
       }}>
-      <div className="modal-wrapper">
       <div className="modal">
         <form>
-
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input name="name" onChange={handleChange} value={formState.name} />
@@ -77,8 +68,8 @@ export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
             <input name="motherName" onChange={handleChange} value={formState.motherName} />
           </div>
           <div className="form-group">
-            <label htmlFor="gotra">Gotra</label>
-            <input name="gotra" onChange={handleChange} value={formState.gotra} />
+            <label htmlFor="relation">Relation</label>
+            <input name="relation" onChange={handleChange} value={formState.relation} />
           </div>
 
           <div className="form-group">
@@ -89,10 +80,6 @@ export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
             <label htmlFor="profession">Profession</label>
             <input name="profession" onChange={handleChange} value={formState.profession} />
           </div>
-          <div className="form-group">
-            <label htmlFor="mobilenumber">Mobile Number</label>
-            <input name="mobilenumber" onChange={handleChange} value={formState.mobilenumber} />
-          </div>
 
           <div className="form-group">
             <label htmlFor="dob">DOB</label>
@@ -102,50 +89,25 @@ export const Modal = ({ closeModal, onSubmit, defaultValue }) => {
               onChange={handleChange} value={DOB}
             ></input>
           </div>
-
           <div className="form-group">
-            <label htmlFor="paddress">Professional address</label>
-            <textarea
-              name="paddress"
+            <label htmlFor="status">Status</label>
+            <select
+              name="status"
               onChange={handleChange}
-              value={formState.paddress}
-              rows={3}
-            />
+              value={formState.status}
+            >
+              <option value="divorced">Divorced</option>
+              <option value="married">Married</option>
+              <option value="unmarried">Unmarried</option>
+              <option value="engaged">Engaged</option>
+              <option value="none">None</option>
+            </select>
           </div>
-          <div className="form-group">
-            <label htmlFor="raddress">Residential address</label>
-            <textarea
-              name="raddress"
-              onChange={handleChange}
-              value={formState.raddress}
-              rows={3}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="mvillage">Main Village</label>
-            <input name="mvillage" onChange={handleChange} value={formState.mvillage} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="village">Village</label>
-            <input name="village" onChange={handleChange} value={formState.village} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="tehsil">Tehsil</label>
-            <input name="tehsil" onChange={handleChange} value={formState.tehsil} />
-          </div>
-          <div className="form-group">
-            <label htmlFor="district">District</label>
-            <input name="district" onChange={handleChange} value={formState.district} />
-          </div>
-
           {errors && <div className="error">{`Please include: ${errors}`}</div>}
           <button type="submit" className="btn" onClick={handleSubmit}>
             Submit
           </button>
         </form>
-      
-      </div>
       </div>
     </div>
   );
